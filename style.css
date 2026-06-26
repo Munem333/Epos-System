@@ -1118,6 +1118,38 @@ box-shadow:none;
 
 }
 
+.send-status{
+
+margin-top:12px;
+
+font-size:12px;
+
+line-height:1.4;
+
+min-height:18px;
+
+text-align:center;
+
+}
+
+.send-status.success{
+
+color:var(--accent-green);
+
+}
+
+.send-status.error{
+
+color:var(--accent-red);
+
+}
+
+.send-status.info{
+
+color:var(--text-secondary);
+
+}
+
 @media (max-width:1200px){
 
 .product-grid{

@@ -318,21 +318,133 @@ document.getElementById("total").textContent = total;
 
 }
 
-function sendData(){
+function buildOrderPayload(){
 
-const total = cart.reduce((sum,item) => sum + item.price * item.qty,0);
+const subtotal = cart.reduce((sum,item) => sum + item.price * item.qty,0);
 
-if(cart.length === 0){
+const discount = 0;
 
-alert("Your cart is empty. Please add at least one product before sending.");
+const total = subtotal - discount;
+
+const items = cart.map(item => ({
+
+id:item.id,
+
+name:item.name,
+
+price:item.price,
+
+qty:item.qty,
+
+lineTotal:item.price * item.qty
+
+}));
+
+const plainText = "ERP_POS|" + total + "|" + items.map(item => item.name + ":" + item.qty + ":" + item.price).join(",");
+
+return {
+
+type:"ERP_POS_ORDER",
+
+currency:"BDT",
+
+subtotal:subtotal,
+
+discount:discount,
+
+total:total,
+
+itemCount:items.reduce((sum,item) => sum + item.qty,0),
+
+items:items,
+
+plainText:plainText,
+
+timestamp:new Date().toISOString()
+
+};
+
+}
+
+function transmitToAndroid(payload){
+
+if(typeof window.AndroidPOS === "undefined"){
+
+return {success:false,reason:"no_bridge"};
+
+}
+
+try{
+
+window.AndroidPOS.sendOrder(JSON.stringify(payload));
+
+return {success:true,channel:"AndroidPOS",bridge:"sendOrder"};
+
+}catch(error){
+
+console.error("AndroidPOS.sendOrder failed:",error);
+
+return {success:false,reason:error.message};
+
+}
+
+}
+
+function showTransmitStatus(message,type){
+
+const statusEl = document.getElementById("sendStatus");
+
+if(!statusEl){
 
 return;
 
 }
 
-const itemList = cart.map(item => item.name + " x" + item.qty + " = ৳" + item.price * item.qty).join("\n");
+statusEl.textContent = message;
 
-alert("Order sent to Android POS!\n\n" + itemList + "\n\nTotal = ৳" + total);
+statusEl.className = "send-status " + type;
+
+}
+
+function sendData(){
+
+if(cart.length === 0){
+
+showTransmitStatus("Your cart is empty. Add at least one product before sending.","error");
+
+return;
+
+}
+
+const sendBtn = document.getElementById("sendBtn");
+
+const payload = buildOrderPayload();
+
+sendBtn.disabled = true;
+
+showTransmitStatus("Sending order to Android POS...","info");
+
+const result = transmitToAndroid(payload);
+
+sendBtn.disabled = false;
+
+if(result.success){
+
+showTransmitStatus("Order sent to Android POS. Total: ৳" + payload.total,"success");
+
+return;
+
+}
+
+if(result.reason === "no_bridge"){
+
+showTransmitStatus("Android bridge not found. Open Web ERP from the Epos System app (Dashboard → Open Web ERP). Chrome/PC browser cannot talk to Android directly.","error");
+
+return;
+
+}
+
+showTransmitStatus("Failed to send order: " + result.reason,"error");
 
 }
 
