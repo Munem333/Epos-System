@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ERP POS - Agile Test Munem</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+<aside class="sidebar">
+
+<div class="logo">
+
+<span class="logo-icon">🛍️</span>
+
+<span class="logo-text">ERP POS</span>
+
+</div>
+
+<nav class="nav-menu">
+
+<button class="nav-item active" type="button">
+
+<span class="nav-icon">▦</span>
+
+Dashboard
+
+</button>
+
+<button class="nav-item" type="button">
+
+<span class="nav-icon">📦</span>
+
+Products
+
+</button>
+
+<button class="nav-item" type="button">
+
+<span class="nav-icon">💰</span>
+
+Sales
+
+</button>
+
+<button class="nav-item" type="button">
+
+<span class="nav-icon">👥</span>
+
+Customers
+
+</button>
+
+<button class="nav-item" type="button">
+
+<span class="nav-icon">📊</span>
+
+Reports
+
+</button>
+
+<button class="nav-item" type="button">
+
+<span class="nav-icon">⚙️</span>
+
+Settings
+
+</button>
+
+</nav>
+
+<div class="user-profile">
+
+<div class="user-avatar">MSK</div>
+
+<div class="user-info">
+
+<strong>Munem Shahriar Khan</strong>
+
+<span>Admin</span>
+
+</div>
+
+<span class="user-chevron">›</span>
+
+</div>
+
+</aside>
+
+<main class="main-content">
+
+<header class="top-header">
+
+<div class="welcome">
+
+<h1>Welcome back, Munem! 👋</h1>
+
+<p>Let's make some sales today.</p>
+
+</div>
+
+<div class="header-actions">
+
+<button class="icon-btn" type="button" title="Search">🔍</button>
+
+<button class="icon-btn notification-btn" type="button" title="Notifications">
+
+🔔
+
+<span class="badge">3</span>
+
+</button>
+
+<div class="datetime" id="datetime"></div>
+
+</div>
+
+</header>
+
+<section class="products-section">
+
+<div class="section-toolbar">
+
+<div class="category-tabs" id="categoryTabs"></div>
+
+<div class="view-toggle">
+
+<button class="view-btn active" type="button" title="Grid view">▦</button>
+
+<button class="view-btn" type="button" title="List view">☰</button>
+
+</div>
+
+</div>
+
+<div class="product-grid" id="productGrid"></div>
+
+<div class="pagination" id="pagination"></div>
+
+</section>
+
+<section class="features-bar">
+
+<div class="feature-card">
+
+<span class="feature-icon">⚡</span>
+
+<div>
+
+<strong>Fast Checkout</strong>
+
+<p>Quick and easy billing</p>
+
+</div>
+
+</div>
+
+<div class="feature-card">
+
+<span class="feature-icon">🛡️</span>
+
+<div>
+
+<strong>Secure Payment</strong>
+
+<p>100% secure transactions</p>
+
+</div>
+
+</div>
+
+<div class="feature-card">
+
+<span class="feature-icon">🔄</span>
+
+<div>
+
+<strong>Real-time Sync</strong>
+
+<p>Instant data synchronization</p>
+
+</div>
+
+</div>
+
+<div class="feature-card">
+
+<span class="feature-icon">🎧</span>
+
+<div>
+
+<strong>24/7 Support</strong>
+
+<p>Always here to help</p>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<aside class="cart-panel">
+
+<div class="cart-header">
+
+<h2>Cart (<span id="cartCount">0</span>)</h2>
+
+<button class="clear-cart-btn" type="button" onclick="clearCart()" title="Clear cart">🗑️</button>
+
+</div>
+
+<div class="cart-items" id="cartItems">
+
+<p class="cart-empty">No items in cart. Add products to get started.</p>
+
+</div>
+
+<div class="cart-summary">
+
+<div class="summary-row">
+
+<span>Subtotal</span>
+
+<span>৳ <span id="subtotal">0</span></span>
+
+</div>
+
+<div class="summary-row">
+
+<span>Discount</span>
+
+<span>৳ <span id="discount">0</span></span>
+
+</div>
+
+<div class="summary-row total-row">
+
+<span>Total</span>
+
+<span>৳ <span id="total">0</span></span>
+
+</div>
+
+<button class="send-btn" id="sendBtn" type="button" onclick="sendData()">
+
+✈ Send To Android POS
+
+</button>
+
+<p class="send-status" id="sendStatus" aria-live="polite"></p>
+
+</div>
+
+</aside>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>

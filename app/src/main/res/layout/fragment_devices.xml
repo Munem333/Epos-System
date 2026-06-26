@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/devicesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Paired Devices"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@id/scanButton"
+        app:layout_constraintTop_toBottomOf="@id/devicesTitle">
+
+        <TextView
+            android:id="@+id/pairedDevicesList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No paired devices found."
+            android:textColor="@color/text_secondary"
+            android:textSize="16sp" />
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/scanButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Scan for Devices"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/gradient_button_bg"
+        app:backgroundTint="@null"
+        style="@style/GradientButtonStyle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
